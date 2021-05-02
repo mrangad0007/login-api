@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Quote;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +58,36 @@ class AuthController extends Controller
         return response()->json([
             "message" => "User registered successfully"   
         ], 201);
+    }
+
+
+    public function quotesSignUp(Request $request)
+    {
+        $request->validate([
+            'author' => 'required|string',
+            'quote' => 'required|string'
+        ]);
+
+        $quote = new Quote([
+             'author'=>$request->author,
+             'quote'=>$request->quote  
+        ]);
+
+        $quote->save();
+
+        return response()->json([
+            "message" => "Quote registered successfully"   
+        ], 201);
+    }
+
+    public function quotesFetch(Request $request)
+    {
+        $quote = Quote::all();
+
+        return response()->json([
+            "quotes"=>$quote
+         ], 200);
+
     }
 
     public function logout(Request $request)

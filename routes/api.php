@@ -21,6 +21,8 @@ Route::namespace('Api')->group(function(){
  
         Route::post('/login', [AuthController::class,'login']);
         Route::post('/signup', [AuthController::class,'signup']);
+        Route::post('/quotesignup', [AuthController::class,'quotesSignUp']);
+        Route::post('/quotefetch', [AuthController::class,'quotesFetch']);
  
     });
 
